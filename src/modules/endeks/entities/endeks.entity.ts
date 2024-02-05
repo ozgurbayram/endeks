@@ -4,10 +4,10 @@ import { User } from "../../user/entities/user.entity";
 
 @Entity()
 class Endeks extends AbstractEntity {
-  @Column({ type: "date" })
+  @Column({ type: "date", nullable: false })
   issued_at: string;
 
-  @Column({ type: "numeric" })
+  @Column({ type: "numeric", nullable: false })
   value: number;
 
   @ManyToOne(() => User)

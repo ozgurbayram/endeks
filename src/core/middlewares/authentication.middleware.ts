@@ -11,10 +11,7 @@ export class IsAuthenticated implements ExpressMiddlewareInterface {
 
     try {
       const decoded = jwt.verify(token, "token-secret");
-      req.user = {
-        id: (decoded as JwtPayload).userId,
-        email: (decoded as JwtPayload).email,
-      };
+      req.user = (decoded as JwtPayload)?.userId;
 
       next();
     } catch (err) {

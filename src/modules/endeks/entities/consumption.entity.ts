@@ -5,15 +5,15 @@ import { User } from "../../user/entities/user.entity";
 @Entity()
 @Unique(["issued_at", "user"])
 class Consumption extends AbstractEntity {
-	@Column({ type: "date" })
-	issued_at: string;
+  @Column({ type: "date", nullable: false })
+  issued_at: string;
 
-	@Column({ type: "numeric" })
-	value: number;
+  @Column({ type: "numeric", nullable: false })
+  value: number;
 
-	@ManyToOne(() => User)
-	@JoinColumn({ name: "user_id" })
-	user: User;
+  @ManyToOne(() => User)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 }
 
 export default Consumption;

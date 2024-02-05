@@ -34,10 +34,7 @@ class AuthController {
       password_confirm,
     });
 
-    const data = await this.authService.loginViaPasswordGrant(
-      user.email,
-      password
-    );
+    const data = await this.authService.loginViaPasswordGrant(user.email, password);
 
     return new SuccessResponse({ data });
   }
@@ -54,11 +51,6 @@ class AuthController {
   @Post("/logout")
   public async logout(@Req() req: Request, @Res() res: Response) {
     return new SuccessResponse({}, "hello from logout").send(res);
-  }
-
-  @Post("/deneme")
-  public async deneme(@Body() body: { email: string }) {
-    return "Hello";
   }
 }
 
