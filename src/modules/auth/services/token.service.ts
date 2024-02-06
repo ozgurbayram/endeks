@@ -42,7 +42,7 @@ class TokenService {
       email: user.email,
     };
 
-    const refreshToken = jwt.sign(payload, "token-secret", {
+    const refreshToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: 6000,
     });
 
@@ -55,7 +55,7 @@ class TokenService {
    * isValidToken
    */
   public async verifyToken(token: string) {
-    const decoded = jwt.verify(token, "token-secret");
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     if (!decoded) {
       throw new AbstractException("Invalid token", 400);
