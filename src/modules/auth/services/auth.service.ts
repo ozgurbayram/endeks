@@ -32,23 +32,17 @@ class AuthService {
     return user;
   }
 
-  public async authenticateUser(body: {
-    email: string;
-    password: string;
-  }): Promise<{ user: User | null; info?: { message: string } }> {
+  public async authenticateUser(body: { email: string; password: string }): Promise<{ user: User | null; info?: { message: string } }> {
     return new Promise((resolve, reject) => {
-      passport.authenticate(
-        "local",
-        (err: Error, user: User, info: { message: string }) => {
-          if (err) {
-            reject(err);
-          } else if (!user) {
-            resolve({ user: null, info });
-          } else {
-            resolve({ user });
-          }
+      passport.authenticate("local", (err: Error, user: User, info: { message: string }) => {
+        if (err) {
+          reject(err);
+        } else if (!user) {
+          resolve({ user: null, info });
+        } else {
+          resolve({ user });
         }
-      )({ body: body } as Request, {} as Response, () => {});
+      })({ body: body } as Request, {} as Response, () => {});
     });
   }
 
@@ -63,7 +57,7 @@ class AuthService {
 
     const tokens = await this.tokenService.generateUserTokens(user);
 
-    return { user, tokens };
+    return tokens;
   }
 
   /**

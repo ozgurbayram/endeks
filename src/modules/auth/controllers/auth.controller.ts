@@ -21,7 +21,7 @@ class AuthController {
 
     const data = await this.authService.loginViaPasswordGrant(email, password);
 
-    return new SuccessResponse({ data });
+    return new SuccessResponse({ ...data });
   }
 
   @Post("/register")
@@ -36,7 +36,7 @@ class AuthController {
 
     const data = await this.authService.loginViaPasswordGrant(user.email, password);
 
-    return new SuccessResponse({ data });
+    return new SuccessResponse({ ...data });
   }
 
   @Post("/refresh_token")

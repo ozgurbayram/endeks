@@ -96,7 +96,11 @@ class EndeksService {
       throw new UserNotFoundException();
     }
 
-    const isEndeksExist = await this.endeksRepository.findOneBy({ issued_at, user });
+    const isEndeksExist = await this.endeksRepository
+      .createQueryBuilder()
+      .where("issued_at = :issued_at", { issued_at })
+      .andWhere("user_id = :user_id", { user_id: user.id })
+      .getOne();
 
     if (isEndeksExist) {
       throw new AbstractException("Endeks at given date is exist");
